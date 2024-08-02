@@ -1,0 +1,223 @@
+<MyScreenManager>:
+    Menu:
+        name: "menu"
+    CannonGame:
+        name: "game"
+    HallOfFame:
+        name: "records"
+    Help:
+        name: "help"
+
+
+<Menu>:
+    Label:
+        text: 'Monster Fight'
+        font_name: 'PixelifySans'
+        font_size: '54sp'
+        pos_hint: {'center_x': 0.503, 'center_y': 0.497}
+        color: 0, 0, 0, 1
+    Label:
+        text: 'Monster Fight'
+        font_name: 'PixelifySans'
+        font_size: '54sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        #color: 0, 0, 0, 1
+    Button:
+        text: "Play"
+        font_name: 'PixelifySans'
+        font_size: '24sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+        size_hint: (0.18, 0.1)
+        on_release:
+            app.root.current = "game"
+            root.manager.transition.direction = "left"
+    Button:
+        text: "Hall of fame"
+        font_name: 'PixelifySans'
+        font_size: '24sp'
+        background_color: 0.35, 0.35, 0.35, 1
+        pos_hint: {'center_x': 0.3, 'center_y': 0.25}
+        size_hint: (0.18, 0.1)
+        on_release:
+            app.root.current = "records"
+            root.manager.transition.direction = "left"
+    Button:
+        text: "Help"
+        font_name: 'PixelifySans'
+        font_size: '24sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        pos_hint: {'center_x': 0.7, 'center_y': 0.25}
+        size_hint: (0.18, 0.1)
+        on_release:
+            app.root.current = "help"
+            root.manager.transition.direction = "left"
+
+<HallOfFame>:
+    Label:
+        text: 'LEADERBOARD'
+        font_name: 'PixelifySans'
+        font_size: '54sp'
+        pos_hint: {'center_x': 0.503, 'center_y': 0.767}
+        color: 1, 0, 0, 1
+    Label:
+        text: 'LEADERBOARD'
+        font_name: 'PixelifySans'
+        font_size: '54sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.77}
+        color: 1, 1, 1, 1
+    Label:
+        text: 'RANK          SCORE'
+        font_name: 'PixelifySans'
+        font_size: '32sp'
+        pos_hint: {'center_x': 0.502, 'center_y': 0.668}
+        color: 1, 0.2, 0.1, 1
+    Label:
+        text: 'RANK          SCORE'
+        font_name: 'PixelifySans'
+        font_size: '32sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.67}
+        color: 1, 1, 1, 1
+
+<Help>:
+    Label:
+        text: 'Help'
+        font_name: 'PixelifySans'
+        font_size: '54sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.78}
+        #color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        size_hint_x: 0.7
+        height: self.minimum_height
+        #padding: [50, 50, 50, 50]
+        pos_hint: {'center_x': 0.55, 'center_y': 0.45}
+
+        Label:
+            text: "MAIN GOAL: You're given 100 coins. Each weapon has its cost of usage. Kill monster that wants to destroy village but use min. number of coins.\n\nINSTRUCTIONS: There is no end for game. Click on area under tank tube to fire projectile. There 2 types of obstacles and mirror which ricochets and empowers the laser. Press 'b' to return to menu.\n\nPRICE & DAMAGE OF WEAPONS:\nBullet - 1 coin | 2 HP\nBomb - 2 coins | 1 HP\nLaser - 2 (-1) coins | 2 (+1) HP\n"
+            font_name: 'PixelifySans'
+            font_size: '21sp'
+            text_size: self.width, None
+            size_hint_y: None
+            height: self.texture_size[1]
+
+
+<CannonGame>:
+    end_screen: end_screen
+
+    Button:
+        text: "Reset"
+        font_name: 'PixelifySans'
+        font_size: '18sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        size_hint: (0.12, 0.08)
+        pos: app.dp(30), app.dp(600)
+        on_release: root.ResetGame()
+
+    Button:
+        text: "Bullet"
+        font_name: 'PixelifySans'
+        font_size: '18sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        size_hint: (0.12, 0.08)
+        pos: app.dp(170), app.dp(600)
+        on_release: root.SetBullet()
+
+    Button:
+        text: "Bomb"
+        font_name: 'PixelifySans'
+        font_size: '18sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        size_hint: (0.12, 0.08)
+        pos: app.dp(310), app.dp(600)
+        on_release: root.SetBomb()
+
+    Button:
+        text: "Laser"
+        font_name: 'PixelifySans'
+        font_size: '18sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        size_hint: (0.12, 0.08)
+        pos: app.dp(450), app.dp(600)
+        on_release: root.SetLaser()
+
+    EndGame:
+        id: end_screen
+        center: self.parent.center
+        opacity: 0
+
+
+
+<EndGame>:
+    size: app.dp(1000), app.dp(700)
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.85
+        Rectangle:
+            size: app.dp(1000), app.dp(700)
+    Label:
+        text: "Congratulations!"
+        font_name: 'PixelifySans'
+        font_size: '32sp'
+        pos: app.dp(470), app.dp(420)
+    Button:
+        text: "Restart"
+        font_name: 'PixelifySans'
+        font_size: '18sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        size: app.dp(130), app.dp(56)
+        pos: app.dp(335), app.dp(280)
+        on_release: root.parent.ResetGame()
+    Button:
+        text: "Back to Menu"
+        font_name: 'PixelifySans'
+        font_size: '18sp'
+        background_color:  0.35, 0.35, 0.35, 1
+        size:  app.dp(130), app.dp(56)
+        pos: app.dp(535), app.dp(280)
+        on_release:
+            app.root.current = "menu"
+            root.parent.manager.transition.direction = "right"
+
+
+
+<Bullet>:
+    size: app.dp(10), app.dp(10)
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+<Bomb>:
+    size: app.dp(20), app.dp(20)
+    color: [0, 0, 0, 1]
+    canvas:
+        Color:
+            rgba: self.color
+        Ellipse:
+            size: self.size
+            pos: self.pos
+            #source: 'bomb_image.png'
+
+<Obstacle>:
+    size: app.dp(40), app.dp(40)
+
+<Tank>:
+    size: app.dp(150), app.dp(75)
+    pos: app.dp(140), app.dp(90)
+    Image:
+        source: './sprites/tank.png'
+        size: app.dp(150), app.dp(75)
+        pos: app.dp(140), app.dp(90)
+
+<Enemy>:
+    pos: app.dp(820), app.dp(320)
+    size: app.dp(100), app.dp(100)
+
+
+
+
